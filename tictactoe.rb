@@ -11,10 +11,11 @@ module Tictactoe
 
 	class Board
 		# Use a hash to hold the board position pieces
-		# Should be able to read and write to the array
+		# Should be able to read and write to the hash
 		attr_accessor :board
 		def initialize
-			@board = {:1 => nil,
+			@board = {
+					:1 => nil,
 					:2 => nil,
 					:3 => nil,
 					:4 => nil,
@@ -24,6 +25,10 @@ module Tictactoe
 					:8 => nil,
 					:9 => nil
 					}
+		end
+
+		def display_board
+			
 		end
 	end
 
