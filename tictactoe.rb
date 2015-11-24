@@ -14,21 +14,22 @@ module Tictactoe
 		# Should be able to read and write to the hash
 		attr_accessor :board
 		def initialize
-			@board = {
-					:1 => nil,
-					:2 => nil,
-					:3 => nil,
-					:4 => nil,
-					:5 => nil,
-					:6 => nil,
-					:7 => nil,
-					:8 => nil,
-					:9 => nil
+			@board = { :one => 1,
+					:two => 2,
+					:three => 3,
+					:four => 4,
+					:five => 5,
+					:six => 6,
+					:seven => 7,
+					:eight => 8,
+					:nine => 9
 					}
 		end
 
 		def display_board
-			
+			@board.each do |key, value|
+				print value % 3 == 0 ? value.to_s << "\n" : value.to_s
+			end
 		end
 	end
 
@@ -36,3 +37,4 @@ module Tictactoe
 	end
 end
 
+Tictactoe::Board.new.display_board
