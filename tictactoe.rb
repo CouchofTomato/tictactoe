@@ -35,6 +35,12 @@ module Tictactoe
 	end
 
 	class Game
+		def initialize
+		end
+
+		def get_player_information
+			
+		end
 	end
 end
 
