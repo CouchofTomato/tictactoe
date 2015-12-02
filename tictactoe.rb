@@ -39,7 +39,11 @@ module Tictactoe
 		end
 
 		def get_player_information
-			
+			puts "Player 1. Please enter your name?"
+			player1_name = gets.chomp
+			puts "Would you like to be X or O"
+			player1_piece = gets.upcase.chomp
+
 		end
 	end
 end
