@@ -1,6 +1,7 @@
 module Tictactoe
 
 	class Player
+		attr_reader :name
 		# A player should have a name and a piece (X or O)
 		# They should be instance variables
 		def initialize name, piece
@@ -36,6 +37,7 @@ module Tictactoe
 
 	class Game
 		def initialize
+			get_player_information
 		end
 
 		def get_player_information
@@ -43,7 +45,7 @@ module Tictactoe
 			player1_name = gets.chomp
 			puts "Would you like to be X or O"
 			player1_piece = gets.chomp.upcase
-			while !player1_piece.eql?("X") || !player1_piece.eql?("O")
+			while !player1_piece.eql?("X") && !player1_piece.eql?("O")
 				puts "Please enter X or O"
 				player1_piece = gets.chomp.upcase
 			end
@@ -53,11 +55,12 @@ module Tictactoe
 			player1_piece == "X" ? player2_piece = "O" : player2_piece = "X"
 			player1 = createPlayer(player1_name, player1_piece)
 			player2 = createPlayer(player2_name, player2_piece)
+		end
 
-			puts player1.to_s
-			puts player2.to_s
+		def createPlayer(name, piece)
+			Player.new(name, piece)
 		end
 	end
 end
 
-Tictactoe::Game.new.get_player_information
+Tictactoe::Game.new
