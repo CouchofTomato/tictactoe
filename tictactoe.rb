@@ -36,8 +36,11 @@ module Tictactoe
 	end
 
 	class Game
+		@@number_of_turns = 0
+		game_running = true
 		def initialize
 			get_player_information
+			start_game
 		end
 
 		def get_player_information
@@ -59,6 +62,22 @@ module Tictactoe
 
 		def createPlayer(name, piece)
 			Player.new(name, piece)
+		end
+
+		def start_game
+			while game_running
+				Board.display_board
+				if number_of_turns.even?
+					puts "#{player1_name}, Please select a square: "
+					player1_value = gets.chomp
+					check_move_is_legal
+
+				end
+			end
+		end
+
+		def check_move_is_legal
+			
 		end
 	end
 end
