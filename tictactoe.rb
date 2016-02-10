@@ -70,14 +70,20 @@ module Tictactoe
 				if number_of_turns.even?
 					puts "#{player1_name}, Please select a square: "
 					player1_value = gets.chomp
-					check_move_is_legal
+					while !check_move_is_legal?(player1_value)
 
 				end
 			end
 		end
 
-		def check_move_is_legal
-			
+		def check_move_is_legal?(value)
+			if !value.is_a? Integer
+				return false
+			end
+			if value < 1 && value > 9
+				return false
+			end
+			if 
 		end
 	end
 end
