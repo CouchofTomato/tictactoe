@@ -37,8 +37,8 @@ module Tictactoe
 
 	class Game
 		@@number_of_turns = 0
-		game_running = true
 		def initialize
+			@game_board = Tictactoe::Board.new
 			get_player_information
 			start_game
 		end
@@ -65,13 +65,15 @@ module Tictactoe
 		end
 
 		def start_game
+			game_running = true
+			puts "game running"
 			while game_running
-				Board.display_board
-				if number_of_turns.even?
-					puts "#{player1_name}, Please select a square: "
+				@game_board.display_board
+				if @@number_of_turns.even?
+					puts "#{@player1.name}, Please select a square: "
 					player1_value = gets.chomp
 					while !check_move_is_legal?(player1_value)
-
+					end
 				end
 			end
 		end
@@ -83,7 +85,10 @@ module Tictactoe
 			if value < 1 && value > 9
 				return false
 			end
-			if 
+			if !game_board.board[val.to_s].is_a? Interger
+				return false
+			end
+			return true
 		end
 	end
 end
