@@ -1,7 +1,7 @@
 module Tictactoe
 
 	class Player
-		attr_reader :name
+		attr_reader :name, :piece
 		# A player should have a name and a piece (X or O)
 		# They should be instance variables
 		def initialize name, piece
@@ -45,7 +45,7 @@ module Tictactoe
 
 		def get_player_information
 			puts "Player 1. Please enter your name."
-			player1_name = gets.chomp
+			player1_name = gets.chomp.capitalize
 			puts "Would you like to be X or O"
 			player1_piece = gets.chomp.upcase
 			while !player1_piece.eql?("X") && !player1_piece.eql?("O")
@@ -53,11 +53,11 @@ module Tictactoe
 				player1_piece = gets.chomp.upcase
 			end
 			puts "Player 2. Please enter your name."
-			player2_name = gets.chomp
+			player2_name = gets.chomp.capitalize
 			player2_piece = ""
 			player1_piece == "X" ? player2_piece = "O" : player2_piece = "X"
-			player1 = createPlayer(player1_name, player1_piece)
-			player2 = createPlayer(player2_name, player2_piece)
+			@@player1 = createPlayer(player1_name, player1_piece)
+			@@player2 = createPlayer(player2_name, player2_piece)
 		end
 
 		def createPlayer(name, piece)
@@ -66,15 +66,27 @@ module Tictactoe
 
 		def start_game
 			game_running = true
-			puts "game running"
 			while game_running
 				@game_board.display_board
 				if @@number_of_turns.even?
-					puts "#{@player1.name}, Please select a square: "
-					player1_value = gets.chomp
+					puts "#{@@player1.name}, Please select a square: "
+					player1_value = gets.chomp.to_i
 					while !check_move_is_legal?(player1_value)
+						puts "Sorry, not a legal move. #{@@player1.name}, Please select a square: "
+						player1_value = gets.chomp.to_i
 					end
+					@game_board.board[player1_value.to_s] = @@player1.piece
+				else
+					puts "#{@@player2.name}, Please select a square: "
+					player2_value = gets.chomp.to_i
+					while !check_move_is_legal?(player2_value)
+						puts "Sorry, not a legal move. #{@@player2.name}, Please select a square: "
+						player2_value = gets.chomp.to_i
+					end
+					@game_board.board[player2_value.to_s] = @@player2.piece
 				end
+				@game_board.board.each {|key, value| puts key + " - " + value.to_s}
+				@@number_of_turns += 1
 			end
 		end
 
@@ -82,10 +94,10 @@ module Tictactoe
 			if !value.is_a? Integer
 				return false
 			end
-			if value < 1 && value > 9
+			if value < 1 || value > 9
 				return false
 			end
-			if !game_board.board[val.to_s].is_a? Interger
+			if !@game_board.board[value.to_s].is_a? Integer
 				return false
 			end
 			return true
