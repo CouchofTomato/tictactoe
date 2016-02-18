@@ -87,7 +87,7 @@ module Tictactoe
 					end
 					@game_board.board[player2_value.to_s] = @@player2.piece
 				end
-				@@number_of_turns += 1
+				@@number_of_turns += 1 if game_running
 			end
 		end
 
