@@ -29,9 +29,11 @@ module Tictactoe
 		end
 
 		def display_board
+			puts ""
 			@board.each do |key, value|
-				print key.to_i % 3 == 0 ? value.to_s << "\n" : value.to_s << " "
+				print key.to_i % 3 == 0 ? value.to_s + "\n" : value.to_s + " "
 			end
+			puts ""
 		end
 	end
 
@@ -85,7 +87,6 @@ module Tictactoe
 					end
 					@game_board.board[player2_value.to_s] = @@player2.piece
 				end
-				@game_board.board.each {|key, value| puts key + " - " + value.to_s}
 				@@number_of_turns += 1
 			end
 		end
