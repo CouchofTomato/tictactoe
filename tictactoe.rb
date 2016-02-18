@@ -38,11 +38,12 @@ module Tictactoe
 	end
 
 	class Game
-		@@number_of_turns = 0
 		def initialize
+			@number_of_turns = 0
 			@game_board = Tictactoe::Board.new
 			get_player_information
 			start_game
+			end_game
 		end
 
 		def get_player_information
@@ -70,7 +71,7 @@ module Tictactoe
 			game_running = true
 			while game_running
 				@game_board.display_board
-				if @@number_of_turns.even?
+				if @number_of_turns.even?
 					puts "#{@@player1.name}, Please select a square: "
 					player1_value = gets.chomp.to_i
 					while !check_move_is_legal?(player1_value)
@@ -87,7 +88,8 @@ module Tictactoe
 					end
 					@game_board.board[player2_value.to_s] = @@player2.piece
 				end
-				@@number_of_turns += 1 if game_running
+				@number_of_turns += 1 if game_running
+				game_running = false if check_winner || @number_of_turns == 9
 			end
 		end
 
@@ -102,6 +104,27 @@ module Tictactoe
 				return false
 			end
 			return true
+		end
+
+		def check_winner
+			winning_positions = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+			winning_positions.each do |element|
+					return true if element.all? {|x| @game_board.board[x.to_s] == "X"}
+					return true if element.all? {|x| @game_board.board[x.to_s] == "O"}
+			end
+			return false
+		end
+
+		def end_game
+			if @number_of_turns == 9
+				puts "Game was a draw."
+			else
+				print @number_of_turns.even? ? @@player1.name : @@player2.name
+				puts " was the winner"
+			end
+			puts "would you like to play again? \"Y\" or \"N\"."
+			response = gets.chomp.upcase
+			response == "Y" ? Tictactoe::Game.new : exit
 		end
 	end
 end
