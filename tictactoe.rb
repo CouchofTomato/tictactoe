@@ -119,7 +119,7 @@ module Tictactoe
 			if @number_of_turns == 9
 				puts "Game was a draw."
 			else
-				print @number_of_turns.even? ? @@player1.name : @@player2.name
+				print @number_of_turns.even? ? @@player2.name : @@player1.name
 				puts " was the winner"
 			end
 			puts "would you like to play again? \"Y\" or \"N\"."
