@@ -15,7 +15,7 @@ module Tictactoe
 		# Should be able to read and write to the hash
 		attr_accessor :board
 		def initialize
-			@board = { 
+			@board = {
 					"1" => 1,
 					"2" => 2,
 					"3" => 3,
@@ -128,5 +128,3 @@ module Tictactoe
 		end
 	end
 end
-
-Tictactoe::Game.new
