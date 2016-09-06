@@ -22,4 +22,14 @@ describe Tictactoe do
       it { expect(board_class).to respond_to(:display_board) }
     end
   end
+
+  describe "Game" do
+    let(:game) {Tictactoe::Game.new}
+
+    describe '#check_move_is_legal?' do
+      it "returns true if the value 5 is passed as an argument" do
+        expect(game.check_move_is_legal?(5)).to be_true
+      end
+    end
+  end
 end
